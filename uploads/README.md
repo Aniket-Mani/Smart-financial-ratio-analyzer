@@ -1,0 +1,1 @@
+Temporary upload folder for incoming files. Ensure this path is secured in production.
