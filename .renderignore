@@ -1,0 +1,6 @@
+frontend/
+uploads/
+*.md
+.git
+.gitignore
+.env.example
