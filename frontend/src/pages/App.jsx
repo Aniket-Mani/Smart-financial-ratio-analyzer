@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { TrendingUp, AlertCircle, Sparkles, Settings } from 'lucide-react';
 import { analyzeStatement, recalculateRatios } from '../services/api';
-import { generatePDF } from '../services/pdfGenerator';
+import { generateFinancialReportPDF } from '../services/pdfGenerator';
 import { scrollToElement } from '../utils/helpers';
 import localStorageService from '../services/localStorage';
 import FileUpload from '../components/FileUpload';
@@ -122,7 +122,7 @@ function App() {
     }
 
     const fileName = files.length > 0 ? files[0].name : 'financial_statement';
-    generatePDF(extractedData, calculatedRatios, fileName);
+    generateFinancialReportPDF(calculatedRatios);
   };
 
   // Custom Ratios Handlers
