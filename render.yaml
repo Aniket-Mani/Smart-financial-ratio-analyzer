@@ -7,9 +7,15 @@ services:
     plan: free
     
     buildCommand: |
-      cd backend
-      pip install --upgrade pip
-      pip install -r requirements.txt
+      # Skip build if only frontend files changed
+      if git diff HEAD~1 HEAD --name-only | grep -v '^frontend/' | grep -v '\.md$' | grep -v '\.renderignore' | grep -q .; then
+        cd backend
+        pip install --upgrade pip
+        pip install -r requirements.txt
+      else
+        echo "Only frontend files changed, skipping backend build"
+        exit 0
+      fi
     
     startCommand: |
       cd backend
