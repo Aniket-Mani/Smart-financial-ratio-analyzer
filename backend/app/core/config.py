@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 from typing import List
+import os
 
 class Settings(BaseSettings):
     # API Keys
@@ -7,11 +8,15 @@ class Settings(BaseSettings):
     
     # Server
     HOST: str = "0.0.0.0"
-    PORT: int = 8000
-    DEBUG: bool = True
+    PORT: int = int(os.getenv("PORT", 8000))
+    DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"
     
-    # CORS
-    ALLOWED_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:5173"]
+    # CORS - Allow frontend URLs in production
+    ALLOWED_ORIGINS: List[str] = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        os.getenv("FRONTEND_URL", "http://localhost:3000")
+    ]
     
     # Upload
     MAX_UPLOAD_SIZE: int = 10485760  # 10MB
