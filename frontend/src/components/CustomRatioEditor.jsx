@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Save, X, TestTube, AlertCircle, CheckCircle, Info, Plus } from 'lucide-react';
 import axios from 'axios';
+import { getAvailableVariables } from '../services/api';
 
 /**
  * CustomRatioEditor Component
@@ -35,9 +36,9 @@ const CustomRatioEditor = ({
   useEffect(() => {
     const fetchVariables = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/available-variables');
-        if (response.data.success) {
-          setAvailableVars(response.data.variables);
+        const response = await getAvailableVariables();
+        if (response.success) {
+          setAvailableVars(response.variables);
         }
       } catch (error) {
         console.error('Failed to fetch variables:', error);

@@ -174,6 +174,19 @@ const api = {
       throw handleApiError(error);
     }
   },
+
+  /**
+   * Get available variables for formula building
+   * @returns {Promise} - List of available financial variables
+   */
+  getAvailableVariables: async () => {
+    try {
+      const response = await apiClient.get('/available-variables');
+      return response.data;
+    } catch (error) {
+      throw handleApiError(error);
+    }
+  },
 };
 
 /**
@@ -208,4 +221,5 @@ export const {
   addCustomRatio,
   deleteCustomRatio,
   clearCustomRatios,
+  getAvailableVariables,
 } = api;
