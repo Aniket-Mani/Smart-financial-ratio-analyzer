@@ -1,5 +1,5 @@
 import { jsPDF } from 'jspdf';
-import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 
 /**
  * Professional Financial Report PDF Generator
@@ -50,6 +50,8 @@ const createDocument = () => {
     format: 'a4'
   });
   doc.setFont('Helvetica');
+  // Initialize autoTable plugin
+  autoTable(doc);
   return doc;
 };
 
